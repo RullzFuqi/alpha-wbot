@@ -1,7 +1,5 @@
-export async function handler() {
-  try {
-    
-  } catch (e) {
-    console.log(e)
-  }
-}
+import { decodeJid, store, dowait, getBuffer, fetchJson } from './library/connecting/engine/machine.js';
+import { loadPlug } from './library/connecting/engine/machine.js';
+
+
+export default handler
