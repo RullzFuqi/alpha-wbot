@@ -67,7 +67,8 @@ async function startConnect(mode) {
     console.error(`Error di Message: ${err}`)
   }
 })
-  
+}
+
 if (!fs.existsSync('./session')) {
   const mode = await question(
     chalk.yellowBright("Silahkan Pilih Metode Koneksi") + "\n" +
