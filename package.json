@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/RullzFuqi/alpha-wbot/issues"
   },
-  "main": "towhatsapp.js",
+  "main": "connect .js",
   "type": "module",
   "scripts": {
     "start": "node --no-deprecation library/connecting/connect.js",
