@@ -1,5 +1,4 @@
 import { handler } from '../..//message.js'
-import { loadPlug } from './engine/plugins.js'
 import { smsg } from './engine/smsg.js'
 import baileys from '@whiskeysockets/baileys'
 import qrcode from 'qrcode-terminal'
@@ -59,27 +58,16 @@ async function startConnect(mode) {
   sock.ev.on('creds.update', saveCreds)
 
   sock.ev.on('messages.upsert', async ({ messages }) => {
-    const m = smsg(sock, messages[0])
-    if (!m.text) return
+  const m = smsg(sock, messages[0])
+  if (!m.text) return
 
-    for (const plugin of await loadPlug()) {
-      try {
-        if (typeof plugin === 'function') {
-          await plugin(sock, m)
-        }
-      } catch (err) {
-        console.error(`Error di plugin: ${err}`)
-      }
-    }
-
-    try {
-      await handler(sock, m)
-    } catch (err) {
-      console.error(`Error di Message: ${err}`)
-    }
-  })
-}
-
+  try {
+    await handler(sock, m)
+  } catch (err) {
+    console.error(`Error di Message: ${err}`)
+  }
+})
+  
 if (!fs.existsSync('./session')) {
   const mode = await question(
     chalk.yellowBright("Silahkan Pilih Metode Koneksi") + "\n" +
