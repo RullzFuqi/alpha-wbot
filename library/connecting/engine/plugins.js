@@ -14,7 +14,17 @@ export async function loadPlug() {
   for (const file of files) {
     const filePath = path.join(pluginsDir, file)
     const plugin = await import(url.pathToFileURL(filePath).href)
-    plugins.push(plugin.default || plugin)
+    const mod = plugin.default || plugin
+
+    if (typeof mod === 'object' && mod.cmd && mod.run) {
+      plugins.push({
+        name: path.basename(file, '.js'),
+        cmd: Array.isArray(mod.cmd) ? mod.cmd : [mod.cmd],
+        desc: mod.desc || 'Tanpa deskripsi',
+        prefix: mod.prefix ?? true,
+        run: mod.run
+      })
+    }
   }
 
   return plugins
