@@ -1,4 +1,5 @@
-import makeWASocket, { makeInMemoryStore, jidDecode } from '@whiskeysockets/baileys'
+import baileys from '@whiskeysockets/baileys'
+import { makeInMemoryStore, jidDecode } from baileys
 import Pino from 'pino'
 import fetch from 'node-fetch'
 
